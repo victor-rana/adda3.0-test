@@ -16,6 +16,9 @@ class SplashActivity : BaseActivity<SplashViewModel>() {
         const val TAG = "SplashActivity"
     }
 
+
+
+
     override fun provideLayoutId(): Int = R.layout.activity_splash
 
     override fun injectDependencies(activityComponent: ActivityComponent) {
