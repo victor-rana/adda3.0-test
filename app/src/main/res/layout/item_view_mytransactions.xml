@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvPortalImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:cardCornerRadius="20dp"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/ic_photo"
+            android:scaleType="fitCenter"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvPortalName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Myntra"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/cvPortalImage"
+        />
+
+    <TextView
+        android:id="@+id/tvTransactionTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="21 Oct, 2021 || 4:45 PM"
+        android:textColor="@color/black_50"
+        android:layout_below="@+id/tvPortalName"
+        android:layout_toRightOf="@+id/cvPortalImage"
+        />
+
+    <TextView
+        android:id="@+id/tvTransactionAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rs. 1061/-"
+        android:layout_marginTop="10dp"
+        android:layout_alignBaseline="@id/tvPortalName"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending"
+        android:textColor="@color/black_50"
+        android:layout_alignBaseline="@id/tvTransactionTimestamp"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>
