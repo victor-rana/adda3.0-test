@@ -32,7 +32,7 @@
     textAppearanceOverline	    Medium all caps 12sp
     -->
 
-    <style name="AppThemeFullscreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppThemeFullscreen" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorSecondary">@color/colorSecondary</item>
@@ -43,7 +43,7 @@
         <item name="android:textColorPrimary">@color/black</item>
     </style>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/colorSecondary</item>
@@ -123,10 +123,10 @@
     <style name="AppTheme.Tab" parent="TextAppearance.MaterialComponents.Tab"/>
     <style name="AppTheme.Chip" parent="TextAppearance.MaterialComponents.Chip"/>
 
-    <style name="AppTheme.Toolbar" parent="Base.Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">?attr/actionBarSize</item>
-    </style>
+<!--    <style name="AppTheme.Toolbar" parent="Base.Theme.MaterialComponents.Light.DarkActionBar">-->
+<!--        <item name="android:layout_width">match_parent</item>-->
+<!--        <item name="android:layout_height">wrap_content</item>-->
+<!--        <item name="android:minHeight">?attr/actionBarSize</item>-->
+<!--    </style>-->
 
 </resources>

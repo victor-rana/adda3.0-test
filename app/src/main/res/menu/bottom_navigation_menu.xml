@@ -12,6 +12,14 @@
           android:icon="@drawable/selector_add_photos"
           app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/itemFeed"
+        android:title="@string/menu_feed"
+        android:titleCondensed="@string/menu_feed"
+        android:icon="@drawable/ic_baseline_dynamic_feed"
+        app:showAsAction="always"/>
+
+
     <item android:id="@+id/itemProfile"
           android:title="@string/menu_profile"
           android:titleCondensed="@string/menu_profile"

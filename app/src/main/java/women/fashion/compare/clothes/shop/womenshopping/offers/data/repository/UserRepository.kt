@@ -7,6 +7,10 @@ import women.fashion.compare.clothes.shop.womenshopping.offers.data.local.prefs.
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.model.User
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.NetworkService
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.request.LoginRequest
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.request.register.RegisterRequest
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.login.Data
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.login.LoginResponse
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.register.RegisterResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -49,15 +53,16 @@ class UserRepository @Inject constructor(
             null
     }
 
-    fun doUserLogin(email: String, password: String): Single<User> =
-        networkService.doLoginCall(LoginRequest(email, password))
+    fun doUserLogin(email: String, password: String?, googleToken: String?, fbToken: String?): Single<LoginResponse> =
+        networkService.doLoginCall(LoginRequest(email, password, googleToken, fbToken))
             .map {
-                User(
-                    it.userId,
-                    it.userName,
-                    it.userEmail,
-                    it.accessToken,
-                    it.profilePicUrl
-                )
+                it
             }
+
+    fun doUserRegister(registerRequest: RegisterRequest): Single<RegisterResponse> =
+        networkService.doRegisterCall(registerRequest)
+            .map {
+                it
+            }
+
 }

@@ -3,6 +3,7 @@ package women.fashion.compare.clothes.shop.womenshopping.offers.ui.base
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import women.fashion.compare.clothes.shop.womenshopping.offers.MainApplication
@@ -26,6 +27,8 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         injectDependencies(buildActivityComponent())
         super.onCreate(savedInstanceState)
         setContentView(provideLayoutId())
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.hide()
         setupObservers()
         setupView(savedInstanceState)
         viewModel.onCreate()
@@ -40,11 +43,11 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     protected open fun setupObservers() {
         viewModel.messageString.observe(this, Observer {
-//            it.data?.run { showMessage(this) }
+            it.data?.run { showMessage(this) }
         })
 
         viewModel.messageStringId.observe(this, Observer {
-//            it.data?.run { showMessage(this) }
+            it.data?.run { showMessage(this) }
         })
     }
 

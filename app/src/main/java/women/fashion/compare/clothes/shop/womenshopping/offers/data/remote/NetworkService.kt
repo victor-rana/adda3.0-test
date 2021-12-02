@@ -11,8 +11,10 @@ import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.Netwo
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.Networking.HEADER_API_KEY
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.request.DummyRequest
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.request.LoginRequest
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.request.register.RegisterRequest
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.DummyResponse
-import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.LoginResponse
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.login.LoginResponse
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.register.RegisterResponse
 import javax.inject.Singleton
 
 @Singleton
@@ -28,8 +30,12 @@ interface NetworkService {
     @POST(Endpoints.LOGIN)
     fun doLoginCall(
         @Body request: LoginRequest,
-        @Header(HEADER_API_KEY) apiKey: String = API_KEY
     ): Single<LoginResponse>
+
+    @POST(Endpoints.REGISTER)
+    fun doRegisterCall(
+        @Body request: RegisterRequest,
+    ): Single<RegisterResponse>
 
 
 

@@ -3,8 +3,13 @@ package women.fashion.compare.clothes.shop.womenshopping.offers.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.gson.Gson
 
 import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.model.User
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.Networking.LOGIN_USER_EXIST_CHECK
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.repository.UserRepository
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.base.BaseViewModel
 import women.fashion.compare.clothes.shop.womenshopping.offers.utils.common.*
@@ -21,6 +26,7 @@ class LoginViewModel(
     private val validationsList: MutableLiveData<List<Validation>> = MutableLiveData()
 
     val launchMain: MutableLiveData<Event<Map<String, String>>> = MutableLiveData()
+    val launchSignup: MutableLiveData<GoogleSignInAccount> = MutableLiveData()
 
     val emailField: MutableLiveData<String> = MutableLiveData()
     val passwordField: MutableLiveData<String> = MutableLiveData()
@@ -54,15 +60,18 @@ class LoginViewModel(
             if (successValidation.size == validations.size && checkInternetConnectionWithMessage()) {
                 loggingIn.postValue(true)
                 compositeDisposable.addAll(
-                    userRepository.doUserLogin(email, password)
+                    userRepository.doUserLogin(email, password, null, null)
                         .subscribeOn(schedulerProvider.io())
                         .subscribe(
                             {
-                                userRepository.saveCurrentUser(it)
+                                Timber.tag("Login").d(Gson().toJson(it))
+                                val user = User(it.data.id, it.data.name, it.data.email, it.data.token, it.data.profileImg)
+                                userRepository.saveCurrentUser(user)
                                 loggingIn.postValue(false)
                                 launchMain.postValue(Event(emptyMap()))
                             },
                             {
+                                Timber.tag("Login").d(it)
                                 handleNetworkError(it)
                                 loggingIn.postValue(false)
                             }
@@ -71,4 +80,39 @@ class LoginViewModel(
             }
         }
     }
+
+    fun onGoogleLogin(account: GoogleSignInAccount) {
+
+//        val validations = Validator.validateLoginFields(email, password)
+//        validationsList.postValue(validations)
+
+        if (checkInternetConnectionWithMessage()) {
+            loggingIn.postValue(true)
+            compositeDisposable.addAll(
+                userRepository.doUserLogin(account.email,null, account.idToken, null)
+                    .subscribeOn(schedulerProvider.io())
+                    .subscribe(
+                        {
+                            Timber.tag("Login").d(Gson().toJson(it))
+                            loggingIn.postValue(false)
+                            if(it.statusMessage == LOGIN_USER_EXIST_CHECK){
+                                launchSignup.postValue(account)
+                            }
+                            else{
+                                val user = User(it.data.id, it.data.name, it.data.email, it.data.token, it.data.profileImg)
+                                launchMain.postValue(Event(emptyMap()))
+                                userRepository.saveCurrentUser(user)
+                            }
+                        },
+                        {
+                            Timber.tag("Login").d(it)
+                            handleNetworkError(it)
+                            loggingIn.postValue(false)
+                            launchSignup.value
+                        }
+                    )
+            )
+        }
+    }
+
 }

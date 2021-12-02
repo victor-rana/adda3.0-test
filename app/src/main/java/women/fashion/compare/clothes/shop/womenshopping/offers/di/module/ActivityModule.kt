@@ -10,7 +10,11 @@ import women.fashion.compare.clothes.shop.womenshopping.offers.data.repository.D
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.repository.UserRepository
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.base.BaseActivity
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.dummy.DummyViewModel
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.LandingViewModel
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.login.LoginViewModel
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.register.viewmodel.FragmentSignupFirstViewModel
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.register.viewmodel.FragmentSignupSecondViewModel
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.register.viewmodel.RegisterViewModel
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.splash.SplashViewModel
 import women.fashion.compare.clothes.shop.womenshopping.offers.utils.ViewModelProviderFactory
 import women.fashion.compare.clothes.shop.womenshopping.offers.utils.network.NetworkHelper
@@ -62,9 +66,27 @@ class ActivityModule(private val activity: BaseActivity<*>) {
             LoginViewModel(schedulerProvider, compositeDisposable, networkHelper, userRepository)
         }).get(LoginViewModel::class.java)
 
+    @Provides
+    fun provideRegisterViewModel(
+        schedulerProvider: SchedulerProvider,
+        compositeDisposable: CompositeDisposable,
+        networkHelper: NetworkHelper,
+        userRepository: UserRepository
+    ): RegisterViewModel = ViewModelProviders.of(
+        activity, ViewModelProviderFactory(RegisterViewModel::class) {
+            RegisterViewModel(schedulerProvider, compositeDisposable, networkHelper, userRepository)
+        }).get(RegisterViewModel::class.java)
 
-
-
+    @Provides
+    fun provideLandingViewModel(
+        schedulerProvider: SchedulerProvider,
+        compositeDisposable: CompositeDisposable,
+        networkHelper: NetworkHelper,
+        userRepository: UserRepository
+    ): LandingViewModel = ViewModelProviders.of(
+        activity, ViewModelProviderFactory(LandingViewModel::class) {
+            LandingViewModel(schedulerProvider, compositeDisposable, networkHelper, userRepository)
+        }).get(LandingViewModel::class.java)
 
 
 }

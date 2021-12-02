@@ -4,7 +4,9 @@ import dagger.Component
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.ActivityScope
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.module.ActivityModule
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.dummy.DummyActivity
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.LandingActivity
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.login.LoginActivity
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.register.RegisterActivity
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.splash.SplashActivity
 
 @ActivityScope
@@ -17,6 +19,10 @@ interface ActivityComponent {
     fun inject(activity: SplashActivity)
 
     fun inject(activity: LoginActivity)
+
+    fun inject(activity: RegisterActivity)
+
+    fun inject(activity: LandingActivity)
 
     fun inject(activity: DummyActivity)
 

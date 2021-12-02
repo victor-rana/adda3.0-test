@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.fragment.FragmentHome"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/addPhotosFragment"
+        android:name="women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.fragment.FragmentAddPhoto"
+        android:label="@string/menu_add_photos"
+        tools:layout="@layout/fragment_photo" />
+
+    <fragment
+        android:id="@+id/addFeedFragment"
+        android:name="women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.fragment.FragmentGlobalFeed"
+        android:label="@string/menu_feed"
+        tools:layout="@layout/fragment_newsfeed" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.fragment.FragmentProfile"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>

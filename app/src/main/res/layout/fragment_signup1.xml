@@ -45,6 +45,7 @@
         >
 
         <TextView
+            android:id="@+id/tvGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Signup with Google"
@@ -94,7 +95,6 @@
         android:hint="@string/email_field_hint"
         android:background="@drawable/bg_grey_roundedborder"
         app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -148,7 +148,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="@string/password_field_hint"
+        android:hint="@string/cnf_password_field_hint"
         android:background="@drawable/bg_grey_roundedborder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

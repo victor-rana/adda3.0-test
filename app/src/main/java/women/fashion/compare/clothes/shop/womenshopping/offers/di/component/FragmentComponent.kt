@@ -5,6 +5,12 @@ import dagger.Component
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.FragmentScope
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.module.FragmentModule
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.dummies.DummiesFragment
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.fragment.FragmentAddPhoto
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.fragment.FragmentGlobalFeed
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.fragment.FragmentHome
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.fragment.FragmentProfile
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.register.FragmentSignupFirst
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.register.FragmentSignupSecond
 
 @FragmentScope
 @Component(
@@ -14,6 +20,18 @@ import women.fashion.compare.clothes.shop.womenshopping.offers.ui.dummies.Dummie
 interface FragmentComponent {
 
     fun inject(fragment: DummiesFragment)
+
+    fun inject(fragment: FragmentSignupFirst)
+
+    fun inject(fragment: FragmentSignupSecond)
+
+    fun inject(fragment: FragmentHome)
+
+    fun inject(fragment: FragmentAddPhoto)
+
+    fun inject(fragment: FragmentProfile)
+
+    fun inject(fragment: FragmentGlobalFeed)
 
 
 }

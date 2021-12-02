@@ -15,7 +15,7 @@ class SplashViewModel(
     schedulerProvider: SchedulerProvider,
     compositeDisposable: CompositeDisposable,
     networkHelper: NetworkHelper,
-    val userRepository: UserRepository
+    private val userRepository: UserRepository
 ) : BaseViewModel(schedulerProvider, compositeDisposable, networkHelper) {
 
     // Event is used by the view model to tell the activity to launch another Activity

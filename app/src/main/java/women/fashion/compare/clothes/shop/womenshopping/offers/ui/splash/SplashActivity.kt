@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import women.fashion.compare.clothes.shop.womenshopping.offers.R
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.component.ActivityComponent
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.base.BaseActivity
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.LandingActivity
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.login.LoginActivity
 import women.fashion.compare.clothes.shop.womenshopping.offers.utils.common.Event
 
@@ -35,6 +36,12 @@ class SplashActivity : BaseActivity<SplashViewModel>() {
         viewModel.launchLogin.observe(this, Observer<Event<Map<String, String>>> {
             it.getIfNotHandled()?.run {
                 startActivity(Intent(applicationContext, LoginActivity::class.java))
+            }
+        })
+
+        viewModel.launchMain.observe(this, Observer {
+            it.getIfNotHandled()?.run {
+                startActivity(Intent(applicationContext, LandingActivity::class.java))
             }
         })
 
