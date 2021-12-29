@@ -8,6 +8,7 @@ import dagger.Component
 import io.reactivex.disposables.CompositeDisposable
 
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.NetworkService
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.repository.GlobalFeedRepository
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.repository.UserRepository
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.ApplicationContext
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.TempDirectory
@@ -56,6 +57,8 @@ interface ApplicationComponent {
      *---------------------------------------------------------------------------------
      */
     fun getUserRepository(): UserRepository
+
+    fun getGlobalFeedRepository(): GlobalFeedRepository
 
     fun getSchedulerProvider(): SchedulerProvider
 
