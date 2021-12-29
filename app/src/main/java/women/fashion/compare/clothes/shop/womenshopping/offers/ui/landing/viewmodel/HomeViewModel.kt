@@ -13,4 +13,8 @@ class HomeViewModel(
     private val userRepository: UserRepository
 ) : BaseViewModel(schedulerProvider, compositeDisposable, networkHelper) {
     override fun onCreate() { }
+
+    fun fetchGlobalFeed(){
+
+    }
 }

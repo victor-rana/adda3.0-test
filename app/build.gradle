@@ -22,7 +22,7 @@ android {
     buildTypes {
         // Add this debug config to provide debug settings
         debug {
-            buildConfigField("String", "BASE_URL", "\"base url\"")
+            buildConfigField("String", "BASE_URL", "\"https://user-reward-system-dev.herokuapp.com\"")
             buildConfigField("String", "API_KEY", "\"HBNA19QVVAPP\"")
         }
         release {

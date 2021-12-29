@@ -3,7 +3,9 @@ package women.fashion.compare.clothes.shop.womenshopping.offers.data.remote
 
 
 import io.reactivex.Single
+import okhttp3.ResponseBody
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.Endpoints.DUMMY
@@ -13,6 +15,7 @@ import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.reque
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.request.LoginRequest
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.request.register.RegisterRequest
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.DummyResponse
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.globalfeed.GlobalFeedResponse
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.login.LoginResponse
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.register.RegisterResponse
 import javax.inject.Singleton
@@ -37,8 +40,7 @@ interface NetworkService {
         @Body request: RegisterRequest,
     ): Single<RegisterResponse>
 
-
-
-
+    @GET(Endpoints.GLOBAL_FEED)
+    fun fetchGlobalFeed(): Single<GlobalFeedResponse>
 
 }

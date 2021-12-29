@@ -8,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.repository.DummyRepository
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.repository.GlobalFeedRepository
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.repository.UserRepository
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.base.BaseFragment
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.dummies.DummiesAdapter
@@ -93,10 +94,10 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
         schedulerProvider: SchedulerProvider,
         compositeDisposable: CompositeDisposable,
         networkHelper: NetworkHelper,
-        userRepository: UserRepository
+        globalFeedRepository: GlobalFeedRepository
     ): GlobalFeedViewModel = ViewModelProviders.of(
         fragment, ViewModelProviderFactory(GlobalFeedViewModel::class) {
-            GlobalFeedViewModel(schedulerProvider, compositeDisposable, networkHelper, userRepository)
+            GlobalFeedViewModel(schedulerProvider, compositeDisposable, networkHelper, globalFeedRepository)
         }).get(GlobalFeedViewModel::class.java)
 
 

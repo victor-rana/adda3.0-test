@@ -1,6 +1,5 @@
 package women.fashion.compare.clothes.shop.womenshopping.offers.ui.register
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
@@ -9,7 +8,6 @@ import androidx.lifecycle.Observer
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import kotlinx.android.synthetic.main.fragment_signup1.*
 import women.fashion.compare.clothes.shop.womenshopping.offers.R
-import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.register.GoogleKeys
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.component.FragmentComponent
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.base.BaseFragment
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.register.viewmodel.FragmentSignupFirstViewModel

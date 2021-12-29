@@ -1,4 +1,4 @@
-package women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.fragment
+package women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.globalfeed
 
 import android.view.View
 import women.fashion.compare.clothes.shop.womenshopping.offers.R
