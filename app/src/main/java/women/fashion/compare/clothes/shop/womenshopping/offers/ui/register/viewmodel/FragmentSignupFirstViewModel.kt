@@ -37,7 +37,9 @@ class FragmentSignupFirstViewModel(
 
     override fun onCreate() {}
 
-    fun onEmailChange(email: String) = emailField.postValue(email)
+    fun onEmailChange(email: String) {
+        emailField.postValue(email)
+    }
 
     fun onPasswordChange(email: String) = passwordField.postValue(email)
 

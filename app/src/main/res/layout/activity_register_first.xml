@@ -43,13 +43,29 @@
                     android:src="@drawable/waving_hand" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/segoe_ui_black"
-                android:text="Welcome Back"
+                android:text="Welcome to "
                 android:textColor="@color/black"
                 android:textSize="28sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/segoe_ui_black"
+                    android:text="FASHION ADDA"
+                    android:textColor="@color/pink_color"
+                    android:textSize="28sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -121,7 +137,6 @@
 
         </LinearLayout>
 
-
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -131,7 +146,6 @@
             android:gravity="center"
             android:text="@string/or"
             android:textColor="@color/grey_stroke" />
-
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
@@ -155,6 +169,30 @@
             android:paddingEnd="10dp"
             android:textSize="14sp" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:fontFamily="@font/segoe_ui_sl"
+            android:text="@string/phone_number"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_grey_roundedborder"
+            android:fontFamily="@font/segoe_ui_sb"
+            android:hint="@string/phone_number_field_hint"
+            android:inputType="number"
+            android:digits="10"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="14sp"
+            android:layout_marginBottom="10dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
@@ -178,9 +216,8 @@
             android:paddingEnd="10dp"
             android:textSize="14sp" />
 
-
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="25dp"
@@ -188,14 +225,13 @@
             android:background="@drawable/pink_10dp_rect"
             android:fontFamily="@font/segoe_uib"
             android:gravity="center"
-            android:text="@string/login_button_text"
+            android:text="@string/sign_up"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutPassword" />
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -209,16 +245,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/segoe_ui_sb"
-                android:text="Forgot Password?"
+                android:text="Already have an account?"
                 android:textColor="@color/black_50" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_sign_up"
+                android:id="@+id/tv_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/segoe_ui_sb"
                 android:gravity="end"
-                android:text="@string/sign_up"
+                android:text="@string/login"
                 android:textColor="@color/pink_color" />
 
         </LinearLayout>

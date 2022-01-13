@@ -1,6 +1,11 @@
 package women.fashion.compare.clothes.shop.womenshopping.offers.ui.base
 
+import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
@@ -18,7 +23,9 @@ import javax.inject.Inject
  * Reference for generics: https://kotlinlang.org/docs/reference/generics.html
  * Basically BaseActivity will take any class that extends BaseViewModel
  */
-abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
+abstract class  BaseActivity<VM : BaseViewModel> : AppCompatActivity(), View.OnClickListener{
+
+   lateinit var progressDialog : ProgressDialog
 
     @Inject
     lateinit var viewModel: VM
@@ -30,6 +37,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         val actionBar: ActionBar? = supportActionBar
         actionBar?.hide()
         setupObservers()
+        setClickListener();
         setupView(savedInstanceState)
         viewModel.onCreate()
     }
@@ -51,6 +59,23 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         })
     }
 
+    fun startActivityCommon( context : Context?, activity : Class<*>){
+        startActivity(Intent(context, activity))
+    }
+
+    fun showLoader(){
+       if( this::progressDialog.isInitialized) {
+           progressDialog.show();
+       } else{
+           progressDialog = ProgressDialog(this)
+           progressDialog.show()
+       }
+    }
+
+    fun hideLoader(){
+       if(this::progressDialog.isInitialized){ progressDialog.dismiss()}
+    }
+
     fun showMessage(message: String) = Toaster.show(applicationContext, message)
 
     fun showMessage(@StringRes resId: Int) = showMessage(getString(resId))
@@ -69,4 +94,11 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     protected abstract fun injectDependencies(activityComponent: ActivityComponent)
 
     protected abstract fun setupView(savedInstanceState: Bundle?)
+
+     open fun setClickListener(){
+    }
+
+    override fun onClick(v: View) {
+
+    }
 }

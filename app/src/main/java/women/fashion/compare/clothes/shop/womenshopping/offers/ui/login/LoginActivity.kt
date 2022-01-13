@@ -3,31 +3,33 @@ package women.fashion.compare.clothes.shop.womenshopping.offers.ui.login
 
 import android.app.Activity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.Observer
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import kotlinx.android.synthetic.main.activity_login.*
 import women.fashion.compare.clothes.shop.womenshopping.offers.R
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.component.ActivityComponent
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.base.BaseActivity
 import women.fashion.compare.clothes.shop.womenshopping.offers.utils.common.Event
-import women.fashion.compare.clothes.shop.womenshopping.offers.utils.common.Status
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 import android.content.Intent
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_login.*
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.LandingActivity
-import women.fashion.compare.clothes.shop.womenshopping.offers.ui.register.RegisterActivity
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.register.RegisterFirstActivity
+import women.fashion.compare.clothes.shop.womenshopping.offers.utils.common.Validation
+import women.fashion.compare.clothes.shop.womenshopping.offers.utils.common.Validator
 
 
 class LoginActivity : BaseActivity<LoginViewModel>() {
+
+
+    private lateinit var email: String
+    private lateinit var passowrd: String
 
     companion object {
         const val TAG = "LoginActivity"
@@ -42,35 +44,54 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         activityComponent.inject(this)
     }
 
+
+    override fun setClickListener() {
+        super.setClickListener()
+
+        btn_login.setOnClickListener(this)
+        tv_sign_up.setOnClickListener(this)
+        tv_forgot_password.setOnClickListener(this)
+        tv_google.setOnClickListener(this)
+        tv_facebook.setOnClickListener(this)
+
+
+    }
+
+    override fun onClick(v: View) {
+        super.onClick(v)
+
+        when (v.id) {
+
+            R.id.btn_login -> {
+                email = et_email.text.toString().trim()
+                passowrd = et_password.text.toString().trim()
+                if (!Validator.validateEmail(email)) {
+                    showMessage(R.string.email_field_invalid)
+                } else if (!Validator.validatePassword(passowrd)) {
+                    showMessage(R.string.password_field_small_length)
+                } else {
+                    showLoader()
+                    viewModel.onLogin(email, passowrd)
+                }
+            }
+            R.id.tv_sign_up -> {
+                startActivityCommon(this, RegisterFirstActivity::class.java)
+            }
+            R.id.tv_forgot_password -> {
+
+            }
+            R.id.tv_google -> {
+
+            }
+            R.id.tv_facebook -> {
+
+            }
+
+        }
+    }
+
     override fun setupView(savedInstanceState: Bundle?) {
 
-        etEmail.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.onEmailChange(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        })
-
-        et_password.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.onPasswordChange(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        })
-
-        tvSignUp.setOnClickListener {
-            startActivity(Intent(applicationContext, RegisterActivity::class.java))
-        }
-
-        initGoogleConfig()
-
-        tvGoogle.setOnClickListener { doGoogleLogin() }
-
-        btLogin.setOnClickListener { viewModel.onLogin() }
     }
 
     private fun initGoogleConfig() {
@@ -82,7 +103,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
-    fun doGoogleLogin(){
+    fun doGoogleLogin() {
 
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, GOOGLE_REQ_CODE)
@@ -107,52 +128,28 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
             Log.d(TAG, "handleLoginResponse ok${account.email}")
 
         } catch (e: Exception) {
-            Log.d(TAG,"handleLoginResponse error: ${e.message}")
+            Log.d(TAG, "handleLoginResponse error: ${e.message}")
             e.message?.let { showMessage(it) }
         }
     }
 
     override fun setupObservers() {
         super.setupObservers()
-        // Event is used by the view model to tell the activity to launch another activity
-        // view model also provided the Bundle in the event that is needed for the Activity
-        viewModel.launchMain.observe(this, Observer<Event<Map<String, String>>> {
-            it.getIfNotHandled()?.run {
-                startActivity(Intent(applicationContext, LandingActivity::class.java))
-                finish()
+
+
+        viewModel.logIn.observe(this, Observer {
+
+            if (it) {
+                startActivityCommon(this, LandingActivity::class.java)
+            } else {
+                showMessage(R.string.invalid_user)
             }
         })
 
-        viewModel.launchSignup.observe(this, Observer {
-            val intent = Intent(applicationContext,RegisterActivity::class.java)
-            intent.putExtra("googleLoginData", it)
-            startActivity(intent)
-        })
 
-        viewModel.emailField.observe(this, Observer {
-            if (etEmail.text.toString() != it) etEmail.setText(it)
-        })
 
-        viewModel.emailValidation.observe(this, Observer {
-            when (it.status) {
-                Status.ERROR -> layoutEmail.error = it.data?.run { getString(this) }
-                else -> layoutEmail.isErrorEnabled = false
-            }
-        })
-
-        viewModel.passwordField.observe(this, Observer {
-            if (et_password.text.toString() != it) et_password.setText(it)
-        })
-
-        viewModel.passwordValidation.observe(this, Observer {
-            when (it.status) {
-                Status.ERROR -> layoutPassword.error = it.data?.run { getString(this) }
-                else -> layoutPassword.isErrorEnabled = false
-            }
-        })
-
-        viewModel.loggingIn.observe(this, Observer {
-            pb_loading.visibility = if (it) View.VISIBLE else View.GONE
-        })
+        viewModel.loader.observe(this, Observer { hideLoader() })
     }
+
+
 }

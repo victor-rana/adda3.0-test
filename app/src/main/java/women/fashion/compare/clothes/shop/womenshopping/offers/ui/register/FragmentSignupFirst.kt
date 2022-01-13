@@ -64,7 +64,7 @@ class FragmentSignupFirst(val googleAccount: GoogleSignInAccount?) : BaseFragmen
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         })
 
-        tvGoogle.setOnClickListener { (activity as RegisterActivity).doGoogleLogin() }
+        tvGoogle.setOnClickListener { (activity as RegisterFirstActivity).doGoogleLogin() }
 
         btSignup.setOnClickListener {
             viewModel.doChangeFragment()
@@ -120,7 +120,7 @@ class FragmentSignupFirst(val googleAccount: GoogleSignInAccount?) : BaseFragmen
         })
 
         viewModel.changeFragment.observe(this, Observer {
-            (activity as RegisterActivity).addSecondFragment()
+          //  (activity as RegisterFirstActivity).addSecondFragment()
         })
     }
 }

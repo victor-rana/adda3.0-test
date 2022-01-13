@@ -16,8 +16,7 @@ import javax.net.ssl.HttpsURLConnection
 abstract class BaseViewModel(
     protected val schedulerProvider: SchedulerProvider,
     protected val compositeDisposable: CompositeDisposable,
-    protected val networkHelper: NetworkHelper
-) : ViewModel() {
+    protected val networkHelper: NetworkHelper) : ViewModel() {
 
     override fun onCleared() {
         compositeDisposable.dispose()
@@ -26,6 +25,7 @@ abstract class BaseViewModel(
 
     val messageStringId: MutableLiveData<Resource<Int>> = MutableLiveData()
     val messageString: MutableLiveData<Resource<String>> = MutableLiveData()
+    val loader: MutableLiveData<Boolean> = MutableLiveData()
 
     protected fun checkInternetConnectionWithMessage(): Boolean =
         if (networkHelper.isNetworkConnected()) {

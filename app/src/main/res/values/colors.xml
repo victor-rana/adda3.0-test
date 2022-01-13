@@ -8,7 +8,13 @@
     <color name="black">#000000</color>
     <color name="black_50">#80000000</color>
     <color name="black_10">#1A000000</color>
-    <color name="white">#ffffff</color>
+    <color name="white">#FFFFFF</color>
     <color name="white_50">#80ffffff</color>
     <color name="grey">#999999</color>
+    <color name="splash_bg_color">#FE2550</color>
+    <color name="pink_color">#F5365C</color>
+    <color name="grey_deeper">#8A8B7A</color>
+    <color name="grey_stroke">#C1C2B8</color>
+    <color name="edit_text_bg_color">#F6F6F5</color>
+
 </resources>

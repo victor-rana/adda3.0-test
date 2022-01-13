@@ -63,7 +63,33 @@ object Validator {
 
         }
 
+    fun validateEmail(email: String?):Boolean {
+        return when {
+            email.isNullOrBlank() ->
+                false
+            !EMAIL_ADDRESS.matcher(email).matches() ->
+                false
+            else ->
+                true
+        }
+
+     }
+
+    fun validatePassword(password: String?):Boolean{
+        return when {
+            password.isNullOrBlank() ->
+                false
+            password.length<6 ->
+                false
+            else ->
+                true
+        }
+
+    }
+
 }
+
+
 
 data class Validation(val field: Field, val resource: Resource<Int>) {
 

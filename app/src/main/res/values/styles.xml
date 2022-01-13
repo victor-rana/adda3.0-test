@@ -123,10 +123,7 @@
     <style name="AppTheme.Tab" parent="TextAppearance.MaterialComponents.Tab"/>
     <style name="AppTheme.Chip" parent="TextAppearance.MaterialComponents.Chip"/>
 
-<!--    <style name="AppTheme.Toolbar" parent="Base.Theme.MaterialComponents.Light.DarkActionBar">-->
-<!--        <item name="android:layout_width">match_parent</item>-->
-<!--        <item name="android:layout_height">wrap_content</item>-->
-<!--        <item name="android:minHeight">?attr/actionBarSize</item>-->
-<!--    </style>-->
-
+    <declare-styleable name="IndicatorLayout">
+        <attr name="indicatorCount" format="integer"/>
+    </declare-styleable>
 </resources>

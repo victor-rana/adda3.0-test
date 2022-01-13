@@ -2,18 +2,23 @@ package women.fashion.compare.clothes.shop.womenshopping.offers.ui.register.view
 
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.internal.util.HalfSerializer.onError
+import io.reactivex.observers.DisposableCompletableObserver
+import io.reactivex.observers.DisposableObserver
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.model.User
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.Networking
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.request.register.RegisterRequest
-import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.register.GoogleKeys.Companion.EMAIL
-import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.register.GoogleKeys.Companion.FAMILY_NAME
-import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.register.GoogleKeys.Companion.NAME
-import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.register.GoogleKeys.Companion.PROFILE_IMG
+import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.register.RegisterResponse
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.repository.UserRepository
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.base.BaseViewModel
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.login.LoginActivity
@@ -26,7 +31,6 @@ class RegisterViewModel(
     compositeDisposable: CompositeDisposable,
     networkHelper: NetworkHelper,
     private val userRepository: UserRepository,
-
 ) : BaseViewModel(schedulerProvider, compositeDisposable, networkHelper)  {
 
     val launchMain: MutableLiveData<Event<Map<String, String>>> = MutableLiveData()
@@ -59,13 +63,12 @@ class RegisterViewModel(
             compositeDisposable.addAll(
                 userRepository.doUserRegister(registerRequest)
                     .subscribeOn(schedulerProvider.io())
-                    .subscribe(
-                        {
+                    .subscribe({
                             val user = User(it.data.id, it.data.name, it.data.email, "it.data.token", it.data.profileImg)
                             loggingIn.postValue(false)
                             if(it.statusMessage == Networking.REGISTER_USER_CHECK){
                                 launchMain.postValue(Event(emptyMap()))
-                                userRepository.saveCurrentUser(user)
+                              //  userRepository.saveCurrentUser(user)
                             }
                             else{
                                errorMessage.postValue(it.statusMessage)
@@ -78,6 +81,31 @@ class RegisterViewModel(
                     )
             )
         }
+
+    }
+
+
+    fun registerUser(registerRequest: RegisterRequest){
+        if (checkInternetConnectionWithMessage()) {
+            loggingIn.postValue(true)
+            compositeDisposable.addAll(userRepository.doUserRegister(registerRequest).toObservable()
+                    .firstOrError()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(object : DisposableSingleObserver<RegisterResponse?>() {
+                        override fun onSuccess(response: RegisterResponse) {
+
+                            Log.d("TAG", "onSuccess  :   "+response.toString())
+                        }
+                        override fun onError(e: Throwable) {
+                            Log.d("TAG", "onError :   "+e.message)
+                        }
+                    })
+            )
+
+        }
+
+
 
     }
 }

@@ -23,24 +23,20 @@ import javax.inject.Singleton
 @Singleton
 interface NetworkService {
 
+    @POST(Endpoints.REGISTER)
+    fun doRegisterCall(@Body request: RegisterRequest ): Single<RegisterResponse>
+
+
+    @POST(Endpoints.LOGIN)
+    fun doLoginCall(@Body request: LoginRequest, ): Single<LoginResponse>
+
+
+    @GET(Endpoints.GLOBAL_FEED)
+    fun fetchGlobalFeed(): Single<GlobalFeedResponse>
 
     @POST(DUMMY)
     fun doDummyCall(
         @Body request: DummyRequest,
-        @Header(HEADER_API_KEY) apiKey: String = API_KEY // default value set when Networking create is called
-    ): Single<DummyResponse>
-
-    @POST(Endpoints.LOGIN)
-    fun doLoginCall(
-        @Body request: LoginRequest,
-    ): Single<LoginResponse>
-
-    @POST(Endpoints.REGISTER)
-    fun doRegisterCall(
-        @Body request: RegisterRequest,
-    ): Single<RegisterResponse>
-
-    @GET(Endpoints.GLOBAL_FEED)
-    fun fetchGlobalFeed(): Single<GlobalFeedResponse>
+        @Header(HEADER_API_KEY) apiKey: String = API_KEY): Single<DummyResponse>
 
 }

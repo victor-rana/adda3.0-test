@@ -24,8 +24,9 @@ class SplashViewModel(
     val launchLogin: MutableLiveData<Event<Map<String, String>>> = MutableLiveData()
 
     override fun onCreate() {
+       // Thread.sleep(2000L)
         // Empty map of key and serialized value is passed to Activity in Event that is needed by the other Activity
-        if (userRepository.getCurrentUser() != null)
+        if (userRepository.getCurrentUser()!!.isNotEmpty())
             launchMain.postValue(Event(emptyMap()))
         else
             launchLogin.postValue(Event(emptyMap()))
