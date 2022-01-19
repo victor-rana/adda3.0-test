@@ -18,6 +18,7 @@ class LoginSignupActivity : BaseActivity<SplashViewModel>(){
         return R.layout.activity_login_signup
     }
 
+
     override fun injectDependencies(activityComponent: ActivityComponent) {
        activityComponent.inject(this)
     }
