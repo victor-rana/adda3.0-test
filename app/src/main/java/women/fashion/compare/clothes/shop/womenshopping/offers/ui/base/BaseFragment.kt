@@ -1,5 +1,6 @@
 package women.fashion.compare.clothes.shop.womenshopping.offers.ui.base
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,7 @@ import javax.inject.Inject
  * Basically BaseFragment will take any class that extends BaseViewModel
  */
 abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
-
+    lateinit var progressDialog : ProgressDialog
     @Inject
     lateinit var viewModel: VM
 
@@ -33,7 +34,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     private fun buildFragmentComponent() =
         DaggerFragmentComponent
             .builder()
-            .applicationComponent((context!!.applicationContext as women.fashion.compare.clothes.shop.womenshopping.offers.MainApplication).applicationComponent)
+            .applicationComponent((requireContext().applicationContext as women.fashion.compare.clothes.shop.womenshopping.offers.MainApplication).applicationComponent)
             .fragmentModule(FragmentModule(this))
             .build()
 
@@ -71,4 +72,17 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     protected abstract fun injectDependencies(fragmentComponent: FragmentComponent)
 
     protected abstract fun setupView(view: View)
+
+    fun showLoader(){
+        if( this::progressDialog.isInitialized) {
+            progressDialog.show();
+        } else{
+            progressDialog = ProgressDialog(requireContext())
+            progressDialog.show()
+        }
+    }
+
+    fun hideLoader(){
+        if(this::progressDialog.isInitialized){ progressDialog.dismiss()}
+    }
 }

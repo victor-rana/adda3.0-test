@@ -1,6 +1,7 @@
-package women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.globalfeed
+package women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.globalfeed.globalfeedmodel.globalfeedresponse
 
 import com.google.gson.annotations.SerializedName
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.globalfeed.globalfeedmodel.globalfeedresponse.PostEntities
 
 data class Post(
     @SerializedName("id"           ) var id           : String?            = null,

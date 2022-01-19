@@ -31,9 +31,10 @@ class LandingActivity : BaseActivity<LandingViewModel>() {
         val appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf (
                 R.id.homeFragment,
-                R.id.addPhotosFragment,
+                R.id.top_departmentFragment,
                 R.id.addFeedFragment,
-                R.id.profileFragment
+                R.id.cartFragment,
+                R.id.offersFragment,
             )
         )
         setupActionBarWithNavController(navHostFragment.navController, appBarConfiguration)

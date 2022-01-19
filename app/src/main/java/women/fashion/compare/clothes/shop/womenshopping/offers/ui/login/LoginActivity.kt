@@ -27,7 +27,6 @@ import women.fashion.compare.clothes.shop.womenshopping.offers.utils.common.Vali
 
 class LoginActivity : BaseActivity<LoginViewModel>() {
 
-
     private lateinit var email: String
     private lateinit var passowrd: String
 

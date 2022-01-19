@@ -1,4 +1,4 @@
-package women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.globalfeed
+package women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.globalfeed.globalfeedmodel.globalfeedresponse
 
 import com.google.gson.annotations.SerializedName
 
