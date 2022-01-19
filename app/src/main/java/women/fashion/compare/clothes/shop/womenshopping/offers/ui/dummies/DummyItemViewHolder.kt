@@ -11,8 +11,7 @@ import women.fashion.compare.clothes.shop.womenshopping.offers.data.model.Dummy
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.component.ViewHolderComponent
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.base.BaseItemViewHolder
 
-class DummyItemViewHolder(parent: ViewGroup) :
-    BaseItemViewHolder<Dummy, DummyItemViewModel>(
+class DummyItemViewHolder(parent: ViewGroup) : BaseItemViewHolder<Dummy, DummyItemViewModel>(
         R.layout.item_view_dummies, parent) {
 
     override fun injectDependencies(viewHolderComponent: ViewHolderComponent) {

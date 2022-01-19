@@ -1,14 +1,14 @@
-package women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.profile
+package women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.home
 
 import android.view.View
 import women.fashion.compare.clothes.shop.womenshopping.offers.R
 import women.fashion.compare.clothes.shop.womenshopping.offers.di.component.FragmentComponent
 import women.fashion.compare.clothes.shop.womenshopping.offers.ui.base.BaseFragment
-import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.viewmodel.ProfileViewModel
+import women.fashion.compare.clothes.shop.womenshopping.offers.ui.landing.viewmodel.HomeViewModel
 
-class FragmentProfile: BaseFragment<ProfileViewModel>() {
+class HomeFragment: BaseFragment<HomeViewModel>() {
     override fun provideLayoutId(): Int {
-        return R.layout.fragment_profile
+        return R.layout.fragment_home
     }
 
     override fun injectDependencies(fragmentComponent: FragmentComponent) {
@@ -16,6 +16,6 @@ class FragmentProfile: BaseFragment<ProfileViewModel>() {
     }
 
     override fun setupView(view: View) {
-        TODO("Not yet implemented")
+
     }
 }

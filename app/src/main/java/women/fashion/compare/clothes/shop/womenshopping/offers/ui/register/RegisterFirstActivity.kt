@@ -3,6 +3,9 @@ package women.fashion.compare.clothes.shop.womenshopping.offers.ui.register
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_register_first.*
 import women.fashion.compare.clothes.shop.womenshopping.offers.R
@@ -43,8 +46,9 @@ class RegisterFirstActivity : BaseActivity<RegisterViewModel>() {
 
         when (v.id) {
             R.id.btn_sign_up -> {
-                startActivity(Intent(this, RegisterSecondActivity::class.java))
-                finish()
+                Log.d("TAG", "onClick: "+viewModel.getEmail().value.toString())
+//                startActivity(Intent(this, RegisterSecondActivity::class.java))
+//                finish()
             }
             R.id.tv_login -> {
                 startActivity(Intent(this, LoginActivity::class.java))
@@ -107,6 +111,37 @@ class RegisterFirstActivity : BaseActivity<RegisterViewModel>() {
 
     override fun setupObservers() {
         super.setupObservers()
+
+        et_email.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.setEmail(s.toString()) }
+            override fun afterTextChanged(s: Editable?) {}
+
+        })
+
+        et_phone_number.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.setPhoneNumber(s.toString()) }
+            override fun afterTextChanged(s: Editable?) {}
+
+        })
+
+        et_password.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { viewModel.setPassword(s.toString()) }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+
+        et_phone_number.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.setEmail(s.toString()) }
+            override fun afterTextChanged(s: Editable?) {}
+
+        })
 
 //        viewModel.loggingIn.observe(this, Observer {
 //            pb_loading_register.visibility = if (it) View.VISIBLE else View.GONE

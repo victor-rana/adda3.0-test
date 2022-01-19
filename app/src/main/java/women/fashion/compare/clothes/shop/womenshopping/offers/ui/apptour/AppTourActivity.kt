@@ -46,33 +46,30 @@ class AppTourActivity : BaseActivity<SplashViewModel>() {
         indicatorLayout.selectCurrentPosition(0)
         registerListeners()
 
+        btn_shop_now.setOnClickListener(View.OnClickListener {
+            startActivityCommon(this, LoginSignupActivity::class.java)
+            finish()
+        })
+
     }
 
     private fun registerListeners() {
         vpIntroSlider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 indicatorLayout.selectCurrentPosition(position)
-                if (position < fragmentList.lastIndex) {
-                    tvSkip.visibility = View.VISIBLE
-                    tvNext.text = "Next"
-                } else {
-                    tvSkip.visibility = View.GONE
-                    tvNext.text = "Get Started"
+                tv_count.text = ""+(position+1)
+                if (position == 0) {
+
+                  tv_description.setText("Jennifer Kingsley exploring new range of winter fashion wear")
+                } else if(position == 1) {
+                    tv_description.setText("Jimmy Chuka exploring new spring sweater collection")
+                } else if(position == 2) {
+                    tv_description.setText("Christain Lobi showing us his new summer beach wear")
+                } else if(position == 3) {
+                    tv_description.setText("Jimmy Chuka exploring new spring sweater collection")
                 }
             }
         })
-        tvSkip.setOnClickListener {
-            startActivity(Intent(this, LandingActivity::class.java))
-            finish()
-        }
-        tvNext.setOnClickListener {
-            val position = vpIntroSlider.currentItem
-            if (position < fragmentList.lastIndex) {
-                vpIntroSlider.currentItem = position + 1
-            } else {
-                startActivity(Intent(this, LoginSignupActivity::class.java))
-                finish()
-            }
-        }
+
     }
 }

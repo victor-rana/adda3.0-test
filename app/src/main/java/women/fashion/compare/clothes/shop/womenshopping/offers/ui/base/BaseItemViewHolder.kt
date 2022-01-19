@@ -18,8 +18,7 @@ import women.fashion.compare.clothes.shop.womenshopping.offers.utils.display.Toa
 import javax.inject.Inject
 
 abstract class BaseItemViewHolder<T : Any, VM : BaseItemViewModel<T>>(
-    @LayoutRes layoutId: Int, parent: ViewGroup
-) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(layoutId, parent, false)),
+    @LayoutRes layoutId: Int, parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(layoutId, parent, false)),
     LifecycleOwner {
 
     init {

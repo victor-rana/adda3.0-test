@@ -1,19 +1,16 @@
 package women.fashion.compare.clothes.shop.womenshopping.offers.data.repository
 
-
-import android.preference.Preference
 import io.reactivex.Single
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.local.db.DatabaseService
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.local.prefs.UserPreferences
-import women.fashion.compare.clothes.shop.womenshopping.offers.data.model.User
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.NetworkService
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.request.LoginRequest
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.request.register.RegisterRequest
-import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.login.Data
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.login.LoginResponse
 import women.fashion.compare.clothes.shop.womenshopping.offers.data.remote.response.register.RegisterResponse
 import javax.inject.Inject
 import javax.inject.Singleton
+
 
 @Singleton
 class UserRepository @Inject constructor(
@@ -22,7 +19,7 @@ class UserRepository @Inject constructor(
     private val userPreferences: UserPreferences
 ) {
 
-    fun saveCurrentUser(user: Data) {
+    fun saveCurrentUser(user: LoginResponse.Data) {
         userPreferences.setString(UserPreferences.KEY_USER_ID, user.id)
         userPreferences.setString(UserPreferences.KEY_USER_NAME, user.name)
         userPreferences.setString(UserPreferences.KEY_USER_EMAIL, user.email)
